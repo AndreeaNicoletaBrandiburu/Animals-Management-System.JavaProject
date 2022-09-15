@@ -38,4 +38,8 @@ public interface AnimalQueries {
     void addAnimalToCsv(Animal animal, String fileName) ;
 
     void removeAnimalById(int id);
+
+    void addAnimalToDatabase(Animal animal);
+
+    void loadAnimalsFromDatabase(String table);
 }

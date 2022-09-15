@@ -13,6 +13,7 @@ import java.util.List;
 
 public class Main {
     private static boolean CSV = false;
+    private static boolean DB = false;
     private static final AnimalQueries animalQueries = new AnimalQueriesImpl();
 
     private final static String CAT_FILE_NAME = "cat.csv";
@@ -26,15 +27,21 @@ public class Main {
         InputStreamReader inputStreamReader = new InputStreamReader(System.in);
         BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
 
-        System.out.println("Choose from the following options: CSV, normal");
+        System.out.println("Choose from the following options: CSV, normal or DB");
         String line;
         line = bufferedReader.readLine();
         if (line.equalsIgnoreCase("csv")) {
             CSV = true;
         }
+        if (line.equalsIgnoreCase("db")) {
+            DB = true;
+        }
         System.out.println("You have the following options: addAnimal, removeAnimal, getAllAnimals, finish");
         if (CSV) {
             fileNames.forEach(animalQueries::loadFromCsv);
+        }
+        if (DB) {
+            animalQueries.loadAnimalsFromDatabase("dog");
         }
         while (!(line = bufferedReader.readLine()).equals("finish")) {
             switch (line) {
@@ -87,6 +94,9 @@ public class Main {
                         if (CSV) {
                             animalQueries.addAnimalToCsv(dog, DOG_FILE_NAME);
                         }
+                        if (DB) {
+                            animalQueries.addAnimalToDatabase(dog);
+                        }
                         System.out.println("The following dog has been inserted " + dog);
                         break;
                     case "cat":
@@ -96,6 +106,9 @@ public class Main {
                         if (CSV) {
                             animalQueries.addAnimalToCsv(cat, CAT_FILE_NAME);
                         }
+                        if (DB) {
+                            animalQueries.addAnimalToDatabase(cat);
+                        }
                         System.out.println("The following cat has been inserted " + cat);
                         break;
                     case "parrot":
@@ -104,6 +117,9 @@ public class Main {
                         animalQueries.addAnimal(parrot);
                         if (CSV) {
                             animalQueries.addAnimalToCsv(parrot, PARROT_FILE_NAME);
+                        }
+                        if (DB) {
+                            animalQueries.addAnimalToDatabase(parrot);
                         }
                         System.out.println("The following parrot has been inserted " + parrot);
                         break;

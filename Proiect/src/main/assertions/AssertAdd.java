@@ -8,6 +8,9 @@ import main.model.animal.Parrot;
 
 import static main.utils.Constants.MINIMUM_DIMENSION_DOG_IN_CM;
 
+/*
+    Those assertions are used to validate each animal that is inserted
+*/
 public class AssertAdd {
     public static void assertAnimal(Animal animal) {
         if (animal instanceof Dog) {
